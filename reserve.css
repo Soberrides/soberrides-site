@@ -1,0 +1,125 @@
+/* Base Styles */
+body {
+  background-color: #1f2b35;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f5f5f5;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Back to Home Link */
+.back-link {
+  color: #ffd700;
+  text-decoration: none;
+  margin-bottom: 30px;
+  font-size: 1em;
+  transition: 0.3s ease;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
+
+/* Form Container */
+.reserve-form {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* Form Title & Description */
+.reserve-form h1 {
+  margin-bottom: 10px;
+  font-size: 2em;
+}
+
+.reserve-form p {
+  font-size: 1em;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+/* Form Inputs */
+.reserve-form input[type="text"],
+.reserve-form input[type="tel"],
+.reserve-form input[type="email"],
+.reserve-form input[type="date"],
+.reserve-form input[type="time"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #1f2b35;
+  font-size: 1em;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.reserve-form input:focus {
+  box-shadow: 0 0 0 2px #ffd700;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.95em;
+  color: #ffd700;
+  text-align: left;
+}
+
+/* Submit Button */
+.submit-btn {
+  margin-top: 10px;
+  background-color: #ffd700;
+  color: #1f2b35;
+  border: none;
+  padding: 14px;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 30px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.submit-btn:hover {
+  background-color: #fbcf00;
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+}
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  font-size: 0.9em;
+  color: #888;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .reserve-form {
+    padding: 30px 20px;
+  }
+
+  .reserve-form h1 {
+    font-size: 1.6em;
+  }
+
+  .reserve-form p {
+    font-size: 0.95em;
+  }
+}

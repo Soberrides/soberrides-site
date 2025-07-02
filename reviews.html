@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customer Reviews - Sober Rides</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #1f2b35;
+      color: #f5f5f5;
+    }
+
+    .navbar {
+      background: #111;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 15px;
+      font-weight: 500;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #ffd700;
+    }
+
+    .review-form {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.08);
+      margin-bottom: 60px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #ffd700;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      color: #1f2b35;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .submit-btn {
+      background: #ffd700;
+      color: #1f2b35;
+      font-weight: bold;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: #ffcf00;
+      transform: scale(1.05);
+    }
+
+    .reviews {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .review-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+    }
+
+    .review-card h4 {
+      margin: 0 0 10px;
+      color: #ffd700;
+    }
+
+    .review-card .stars {
+      color: gold;
+      font-size: 1.1em;
+      margin-bottom: 8px;
+    }
+
+    .review-card p {
+      color: #ddd;
+      font-size: 1em;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.9em;
+      padding: 20px;
+      background: #111;
+      color: #bbb;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo"><strong>Sober Rides</strong></div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Leave a Review</h1>
+    <form class="review-form" onsubmit="submitReview(event)">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input id="name" name="name" type="text" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input id="email" name="email" type="email" required />
+      </div>
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <select id="rating" name="rating" required>
+          <option value="">Select</option>
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="1">★☆☆☆☆</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="comment">Your Review</label>
+        <textarea id="comment" name="comment" required></textarea>
+      </div>
+      <button class="submit-btn" type="submit">Submit Review</button>
+    </form>
+
+    <h2>What Others Say</h2>
+    <div class="reviews" id="review-list">
+      <!-- Reviews will load here -->
+    </div>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 Sober Rides. All rights reserved.
+  </div>
+
+  <script>
+    async function submitReview(e) {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        rating: document.getElementById('rating').value,
+        comment: document.getElementById('comment').value
+      };
+
+      try {
+        const res = await fetch('/submit-review', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (!res.ok) throw new Error('Server error');
+        const result = await res.json();
+        alert(result.message);
+        e.target.reset();
+        loadReviews();
+      } catch (err) {
+        alert("Something went wrong. Please try again later.");
+        console.error(err);
+      }
+    }
+
+    async function loadReviews() {
+      try {
+        const res = await fetch('/reviews.json');
+        const reviews = await res.json();
+        const reviewList = document.getElementById('review-list');
+        reviewList.innerHTML = '';
+
+        reviews.reverse().forEach(({ name, rating, comment }) => {
+          const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+          const div = document.createElement('div');
+          div.className = 'review-card';
+          div.innerHTML = `
+            <h4>${name}</h4>
+            <div class="stars">${stars}</div>
+            <p>${comment}</p>
+          `;
+          reviewList.appendChild(div);
+        });
+      } catch (err) {
+        console.error("Failed to load reviews:", err);
+      }
+    }
+
+    window.onload = loadReviews;
+  </script>
+
+</body>
+</html>

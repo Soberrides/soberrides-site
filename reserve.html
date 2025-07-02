@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reserve Your Ride | Sober Rides</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Reserve your sober ride safely and easily. Fill the form to book a designated driver who gets you and your car home safely.">
+  <style>
+    body {
+      background-color: #1f2b35;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #f5f5f5;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .back-link {
+      color: #ffd700;
+      text-decoration: none;
+      margin-bottom: 30px;
+      font-size: 1em;
+      transition: 0.3s ease;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+      color: #ffffff;
+    }
+
+    .reserve-form {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .reserve-form h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2em;
+    }
+
+    .reserve-form p {
+      text-align: center;
+      font-size: 0.95em;
+      color: #ccc;
+      margin-bottom: 30px;
+    }
+
+    .reserve-form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 6px;
+      background-color: #f5f5f5;
+      color: #1f2b35;
+      font-size: 1em;
+    }
+
+    .reserve-form input:focus {
+      outline: 2px solid #ffd700;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background-color: #ffd700;
+      color: #1f2b35;
+      font-weight: bold;
+      padding: 14px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+
+    .submit-btn:hover {
+      background-color: #ffcf00;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.9);
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.95em;
+      color: #ffd700;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="back-link">← Back to Home</a>
+
+  <form class="reserve-form" action="https://formspree.io/f/xqabjqqe" method="POST">
+    <h1>Reserve Your Ride</h1>
+    <p>Fill out the form below and we’ll be in touch to confirm your ride.</p>
+
+    <input type="text" name="Full Name" placeholder="Full Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <input type="tel" name="Phone Number" placeholder="Phone Number" required />
+    <input type="text" name="Pickup Location" placeholder="Pickup Location" required />
+    <input type="text" name="Dropoff Location" placeholder="Dropoff Location" required />
+    
+    <input type="date" name="Pickup Date" placeholder="Pickup Date" required />
+
+    <label for="pickup-time">Pickup Time</label>
+    <input type="time" name="Pickup Time" id="pickup-time" required />
+
+    <button class="submit-btn" type="submit">Submit Reservation</button>
+  </form>
+
+  <footer>&copy; 2025 Sober Rides. All rights reserved.</footer>
+
+</body>
+</html>
